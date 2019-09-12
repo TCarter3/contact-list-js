@@ -1,36 +1,48 @@
 import React from 'react';
 import { Header, Container, Table, Card, Button } from 'semantic-ui-react';
 
-const Cards = ( {cards} ) => (
-    <div >
+class Cards extends React.Component {
+    
+
+    
+
+
+render() {
+    
+    return(
+    <Container >
     <Card.Group itemsPerRow={3}>
         {
-        cards.map( card => ( 
+        this.props.cards.map( card => ( 
 <Card key={card.id} style={{ border: "solid black 1px", background: "yellow", }}  >
-    {/* <div>
-        {card.id}
-    </div> */}
     <br/>
     <br/>
     <br/>
         <div>
-        <h2>{card.cardFront}</h2>
-    </div>
+            <h2>
+            { card.showBack ? card.cardBack : card.cardFront }
+            </h2>
+        </div>
     <br/>
     <br/>
     <br/>
     <div style={{display: "flex", justifyContent: "space-between"}}>
     <Button 
+    onClick={() => this.props.removeCard(card.id)}
     style={{ background: "yellow", color: "red"}}>
         Delete 
     </Button>
-    <Button style={{ background: "yellow",}}>
+    <Button 
+    onClick={() => this.props.toggleCard(card.id)}
+    style={{ background: "yellow",}}>
         Flip
     </Button>
     </div>
 </Card>))}
 </Card.Group>
-</div>
-);
+</Container>
+    );
+}
+};
 
 export default Cards;
